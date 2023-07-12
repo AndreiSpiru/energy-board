@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {Props as DonutProps} from "./charts/Donut";
 
 export class GenerationType {
     name: string;
@@ -30,8 +29,12 @@ const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summar
 
 const smallestPercentageDisplayed = 0.01;
 
+export interface ChartProps{
+    energyData: GenerationType[];
+}
+
 interface Props {
-    chart: React.FC<DonutProps>;
+    chart: React.FC<ChartProps>;
 }
 
 const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
@@ -49,7 +52,7 @@ const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
     {
         //console.log(data);
         let list : GenerationType[] = data[0].data.map((d) => new GenerationType(d.fuelType, d.generation, "#FFFFFF"));
-        let props : DonutProps = {energyData: []};
+        let props : ChartProps = {energyData: []};
         let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
         for (let e of list) {
             if (e.amount / totalGenerated < smallestPercentageDisplayed) {
