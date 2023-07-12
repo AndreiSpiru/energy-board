@@ -2,6 +2,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
 import Donut, { energyTypeDataExample } from "./components/charts/Donut";
+import Chart from "./components/Chart";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <div className="container">
         <h1>National grid: Live</h1>
         <div className="section">
-          <Donut energyData = {energyTypeDataExample} />
+          <Chart chart={Donut} />
         </div>
       </div>
     </div>

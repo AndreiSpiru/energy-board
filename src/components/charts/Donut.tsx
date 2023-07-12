@@ -19,12 +19,15 @@ export const energyTypeDataExample = new Array<EnergyType>(
   // Show category label for each item in the donut graph
   const labelContent = (e: { category: any; }) => e.category;
 
-interface Props {
+export interface Props {
     energyData: EnergyType[];
 }
   
   const Donut: React.FC<Props> = ({ energyData } : Props) => {
+    
     return (
+      energyData && 
+      <>
       <Chart>
         <ChartTitle text="Energy source distribution" />
         <ChartLegend visible={false} />
@@ -43,6 +46,7 @@ interface Props {
           </ChartSeriesItem>
         </ChartSeries>
       </Chart>
+      </>
     );
   };
   

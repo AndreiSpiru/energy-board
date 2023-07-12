@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import Donut, {Props as DonutProps} from "./charts/Donut";
 
 export class EnergyType {
     name: string;
@@ -27,23 +28,34 @@ interface EnergyData {
 
 const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
 
+interface Props {
+    chart: React.FC<DonutProps>;
+}
 
-export default function Chart (chart : React.FC) {
+const Chart : React.FC<Props> = ({ chart } : Props) => {
     const [data, setData] = useState<EnergyData[]>([]);
-    const [types, setTypes] = useState<EnergyType[]>([]);
 
-    function fetchInfo() {
-        return fetch(url).then((res) => res.json()).then((res) => setData(res))
+    const fetchInfo = () => {
+        return fetch(url).then((res) => res.json()).then((res) => setData(res));
     }
 
     useEffect(() => {
         fetchInfo()
     }, []);
 
-    useEffect(() => {
+    if(data.length > 0)
+    {
+        console.log(data);
         let list = data[0].data;
-        setTypes(list.map((d) => new EnergyType(d["fuelType"], d["generation"], "#FFFFFF")));
-    }, [data]);
-
-    return chart(types);
+        const donutProps : DonutProps = {energyData : list.map((d) => new EnergyType(d.fuelType, d.generation, "#FFFFFF"))};
+        return chart(donutProps);
+    }
+    else{
+        return(
+            <></>
+        )
+    }
+    
 }
+
+export default Chart;
