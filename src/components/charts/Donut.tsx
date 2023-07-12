@@ -7,20 +7,20 @@ import {
     ChartSeriesLabels,
   } from "@progress/kendo-react-charts";
 import { COLORS } from "../../constants";
-import { EnergyType } from "../Chart";
+import { GenerationType } from "../ChartComponents";
   
-export const energyTypeDataExample = new Array<EnergyType>(
-    new EnergyType("Green", 150, COLORS.green),
-    new EnergyType("Fossil", 100, COLORS.orange),
-    new EnergyType("Nuclear", 75, COLORS.blue),
-    new EnergyType("Wind", 50, COLORS.blue)
+export const energyTypeDataExample = new Array<GenerationType>(
+    new GenerationType("Green", 150, COLORS.green),
+    new GenerationType("Fossil", 100, COLORS.orange),
+    new GenerationType("Nuclear", 75, COLORS.blue),
+    new GenerationType("Wind", 50, COLORS.blue)
 )
   
   // Show category label for each item in the donut graph
   const labelContent = (e: { category: any; }) => e.category;
 
 export interface Props {
-    energyData: EnergyType[];
+    energyData: GenerationType[];
 }
   
   const Donut: React.FC<Props> = ({ energyData } : Props) => {

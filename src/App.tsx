@@ -2,7 +2,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
 import Donut from "./components/charts/Donut";
-import GenerationTypeChart from "./components/Chart";
+import GenerationTypeChart from "./components/ChartComponents";
 
 function App() {
   return (
