@@ -7,7 +7,7 @@ import {
     ChartSeriesLabels,
   } from "@progress/kendo-react-charts";
 import { COLORS } from "../../constants";
-import { ChartProps} from "../GenerationType";
+import { GenerationTypeChartProps} from "../GenerationType";
 
   
   // Show category label for each item in the donut graph
@@ -15,10 +15,10 @@ import { ChartProps} from "../GenerationType";
 
 
   
-const Donut: React.FC<ChartProps> = ({ energyData } : ChartProps) => {
+const Donut: React.FC<GenerationTypeChartProps> = ({ energyData: data } : GenerationTypeChartProps) => {
     
     return (
-      energyData && 
+      data && 
       <>
       <Chart style = {{
         height: '30vw',
@@ -29,7 +29,7 @@ const Donut: React.FC<ChartProps> = ({ energyData } : ChartProps) => {
         <ChartSeries>
           <ChartSeriesItem
             type="pie"
-            data={energyData}
+            data={data}
             categoryField="name"
             field="amount"
           >
