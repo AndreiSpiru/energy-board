@@ -1,5 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { ChartProps } from "./Chart";
+import Donut from "./charts/Donut";
 
 export class GenerationType {
     name: string;
@@ -29,51 +31,32 @@ const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summar
 
 const smallestPercentageDisplayed = 0.01;
 
-export interface GenerationTypeChartProps {
-    energyData: GenerationType[];
+export interface GenerationTypeChartProps extends ChartProps{
+    data: GenerationType[];
 }
 
 interface Props {
-    chart: React.FC<GenerationTypeChartProps>;
+    data: GenerationTypeDataPoint[];
+    children: JSX.Element;
 }
 
-const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
-    const [data, setData] = useState<GenerationTypeDataPoint[]>([]);
-
-    const fetchInfo = () => {
-        return fetch(url).then((res) => res.json()).then((res) => setData(res));
-    }
-
-    useEffect(() => {
-        fetchInfo()
-    }, []);
-
-    if(data.length > 0)
-    {
-        //console.log(data);
-        let list : GenerationType[] = data[0].data.map((d) => new GenerationType(d.fuelType, d.generation, "#FFFFFF"));
-        let props : GenerationTypeChartProps = {energyData: []};
-        let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
-        for (let e of list) {
-            if (e.amount / totalGenerated < smallestPercentageDisplayed) {
-                let other = props.energyData.find(d => d.name === "Other");
-                if (other == null) {
-                    props.energyData.push(new GenerationType("Other", e.amount, "#000000"));
-                } else {
-                    other.amount += e.amount;
-                }
+const GenerationTypeChart : React.FC<Props> = (props : Props) => {
+    let list : GenerationType[] = props.data[0].data.map((d) => new GenerationType(d.fuelType, d.generation, "#FFFFFF"));
+    let generationData : GenerationType[] = [];
+    let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
+    for (let e of list) {
+        if (e.amount / totalGenerated < smallestPercentageDisplayed) {
+            let other = generationData.find(d => d.name === "Other");
+            if (other == null) {
+                generationData.push(new GenerationType("Other", e.amount, "#000000"));
             } else {
-                props.energyData.push(e);
+                other.amount += e.amount;
             }
+        } else {
+            generationData.push(e);
         }
-        return chart(props);
     }
-    else{
-        return(
-            <></>
-        )
-    }
-    
+    return React.cloneElement(props.children, { generationData });
 }
 
 export default GenerationTypeChart;

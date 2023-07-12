@@ -10,9 +10,9 @@ import {
 import { GenerationTypeChartProps} from "../GenerationType";
 
   
-const Column: React.FC<GenerationTypeChartProps> = ({ energyData } : GenerationTypeChartProps) => {
+const Column: React.FC<GenerationTypeChartProps> = ({ data } : GenerationTypeChartProps) => {
     return (
-      energyData && 
+      data && 
       <>
       <Chart style={{ 
         height: '30vw',
@@ -24,7 +24,7 @@ const Column: React.FC<GenerationTypeChartProps> = ({ energyData } : GenerationT
               <ChartCategoryAxisItem categories={[]} startAngle={45} />
             </ChartCategoryAxis>
             <ChartSeries>
-              {energyData.map((item, idx) => (
+              {data.map((item, idx) => (
                 <ChartSeriesItem
                   key={idx}
                   type="column"

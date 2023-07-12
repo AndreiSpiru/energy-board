@@ -15,7 +15,7 @@ import { GenerationTypeChartProps} from "../GenerationType";
 
 
   
-const Donut: React.FC<GenerationTypeChartProps> = ({ energyData: data } : GenerationTypeChartProps) => {
+const Donut: React.FC<GenerationTypeChartProps> = ({ data } : GenerationTypeChartProps) => {
     
     return (
       data && 
