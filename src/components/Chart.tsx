@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Donut, {Props as DonutProps} from "./charts/Donut";
+import {Props as DonutProps} from "./charts/Donut";
 
 export class EnergyType {
     name: string;

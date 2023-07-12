@@ -28,7 +28,10 @@ export interface Props {
     return (
       energyData && 
       <>
-      <Chart>
+      <Chart style = {{
+        height: '50vw',
+        width: '50vw',
+      }}>
         <ChartTitle text="Energy source distribution" />
         <ChartLegend visible={false} />
         <ChartSeries>

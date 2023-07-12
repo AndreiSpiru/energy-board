@@ -1,7 +1,7 @@
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
-import Donut, { energyTypeDataExample } from "./components/charts/Donut";
+import Donut from "./components/charts/Donut";
 import Chart from "./components/Chart";
 
 function App() {
