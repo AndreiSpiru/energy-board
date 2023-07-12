@@ -27,7 +27,7 @@ interface GenerationTypeDataPoint {
 
 const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
 
-const smallestPercentageDisplayed = 0.01;
+const smallestProportionDisplayed = 0.01;
 
 export interface GenerationTypeChartProps {
     energyData: GenerationType[];
@@ -55,7 +55,7 @@ const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
         let props : GenerationTypeChartProps = {energyData: []};
         let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
         for (let e of list) {
-            if (e.amount / totalGenerated < smallestPercentageDisplayed) {
+            if (e.amount / totalGenerated < smallestProportionDisplayed) {
                 let other = props.energyData.find(d => d.name === "Other");
                 if (other == null) {
                     props.energyData.push(new GenerationType("Other", e.amount, "#000000"));
