@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {Props as DonutProps} from "./charts/Donut";
+import Donut, {Props as DonutProps} from "./charts/Donut";
 
 export class EnergyType {
     name: string;
@@ -28,11 +28,13 @@ interface EnergyData {
 
 const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
 
+const smallestPercentageDisplayed = 0.01;
+
 interface Props {
     chart: React.FC<DonutProps>;
 }
 
-const Chart : React.FC<Props> = ({ chart } : Props) => {
+const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
     const [data, setData] = useState<EnergyData[]>([]);
 
     const fetchInfo = () => {
@@ -45,10 +47,23 @@ const Chart : React.FC<Props> = ({ chart } : Props) => {
 
     if(data.length > 0)
     {
-        console.log(data);
-        let list = data[0].data;
-        const donutProps : DonutProps = {energyData : list.map((d) => new EnergyType(d.fuelType, d.generation, "#FFFFFF"))};
-        return chart(donutProps);
+        //console.log(data);
+        let list : EnergyType[] = data[0].data.map((d) => new EnergyType(d.fuelType, d.generation, "#FFFFFF"));
+        let props : DonutProps = {energyData: []};
+        let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
+        for (let e of list) {
+            if (e.amount / totalGenerated < smallestPercentageDisplayed) {
+                let other = props.energyData.find(d => d.name === "Other");
+                if (other == null) {
+                    props.energyData.push(new EnergyType("Other", e.amount, "#000000"));
+                } else {
+                    other.amount += e.amount;
+                }
+            } else {
+                props.energyData.push(e);
+            }
+        }
+        return chart(props);
     }
     else{
         return(
@@ -58,4 +73,4 @@ const Chart : React.FC<Props> = ({ chart } : Props) => {
     
 }
 
-export default Chart;
+export default GenerationTypeChart;

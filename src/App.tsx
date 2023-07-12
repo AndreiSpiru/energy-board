@@ -2,7 +2,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
 import Donut from "./components/charts/Donut";
-import Chart from "./components/Chart";
+import GenerationTypeChart from "./components/Chart";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <div className="container">
         <h1>National grid: Live</h1>
         <div className="section">
-          <Chart chart={Donut} />
+          <GenerationTypeChart chart={Donut} />
         </div>
       </div>
     </div>
