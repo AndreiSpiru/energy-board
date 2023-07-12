@@ -13,15 +13,15 @@ export class GenerationType {
     }
 }
 
-interface EnergyTypeJSON {
+interface GenerationTypeJSON {
     fuelType: string;
     generation: number;
 }
 
-interface EnergyData {
+interface GenerationTypeDataPoint {
     startTime : string;
     settlementPeriod: number;
-    data: Array<EnergyTypeJSON>;
+    data: Array<GenerationTypeJSON>;
 }
 
 
@@ -38,7 +38,7 @@ interface Props {
 }
 
 const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
-    const [data, setData] = useState<EnergyData[]>([]);
+    const [data, setData] = useState<GenerationTypeDataPoint[]>([]);
 
     const fetchInfo = () => {
         return fetch(url).then((res) => res.json()).then((res) => setData(res));
