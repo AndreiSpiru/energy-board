@@ -7,7 +7,7 @@ import {
     ChartSeriesLabels,
   } from "@progress/kendo-react-charts";
 import { COLORS } from "../../constants";
-import { GenerationType } from "../ChartComponents";
+import { GenerationType } from "../GenerationType";
   
 export const energyTypeDataExample = new Array<GenerationType>(
     new GenerationType("Green", 150, COLORS.green),
