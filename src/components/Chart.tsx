@@ -49,21 +49,21 @@ const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
     {
         //console.log(data);
         let list : EnergyType[] = data[0].data.map((d) => new EnergyType(d.fuelType, d.generation, "#FFFFFF"));
-        let donutProps : DonutProps = {energyData: []};
+        let props : DonutProps = {energyData: []};
         let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
         for (let e of list) {
             if (e.amount / totalGenerated < smallestPercentageDisplayed) {
-                let other = donutProps.energyData.find(d => d.name === "Other");
+                let other = props.energyData.find(d => d.name === "Other");
                 if (other == null) {
-                    donutProps.energyData.push(new EnergyType("Other", e.amount, "#000000"));
+                    props.energyData.push(new EnergyType("Other", e.amount, "#000000"));
                 } else {
                     other.amount += e.amount;
                 }
             } else {
-                donutProps.energyData.push(e);
+                props.energyData.push(e);
             }
         }
-        return chart(donutProps);
+        return chart(props);
     }
     else{
         return(
