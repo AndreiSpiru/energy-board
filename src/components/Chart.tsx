@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {Props as DonutProps} from "./charts/Donut";
 
 export class EnergyType {
     name: string;
@@ -28,8 +27,12 @@ interface EnergyData {
 
 const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
 
+export interface ChartProps{
+    energyData: EnergyType[];
+}
+
 interface Props {
-    chart: React.FC<DonutProps>;
+    chart: React.FC<ChartProps>;
 }
 
 const Chart : React.FC<Props> = ({ chart } : Props) => {
@@ -47,7 +50,7 @@ const Chart : React.FC<Props> = ({ chart } : Props) => {
     {
         console.log(data);
         let list = data[0].data;
-        const donutProps : DonutProps = {energyData : list.map((d) => new EnergyType(d.fuelType, d.generation, "#FFFFFF"))};
+        const donutProps : ChartProps = {energyData : list.map((d) => new EnergyType(d.fuelType, d.generation, "#FFFFFF"))};
         return chart(donutProps);
     }
     else{

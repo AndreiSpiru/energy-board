@@ -6,37 +6,25 @@ import {
     ChartSeriesItem,
     ChartSeriesLabels,
   } from "@progress/kendo-react-charts";
-import { COLORS } from "../../constants";
-import { EnergyType } from "../Chart";
-  
-export const energyTypeDataExample = new Array<EnergyType>(
-    new EnergyType("Green", 150, COLORS.green),
-    new EnergyType("Fossil", 100, COLORS.orange),
-    new EnergyType("Nuclear", 75, COLORS.blue),
-    new EnergyType("Wind", 50, COLORS.blue)
-)
+import { ChartProps, EnergyType } from "../Chart";
+
   
   // Show category label for each item in the donut graph
   const labelContent = (e: { category: any; }) => e.category;
-
-export interface Props {
-    energyData: EnergyType[];
-}
   
-  const Donut: React.FC<Props> = ({ energyData } : Props) => {
-    
+const Donut: React.FC<ChartProps> = ({ energyData } : ChartProps) => {
     return (
       energyData && 
       <>
       <Chart style = {{
-        height: '50vw',
-        width: '50vw',
+        height: '30vw',
+        width: '30vw',
       }}>
         <ChartTitle text="Energy source distribution" />
         <ChartLegend visible={false} />
         <ChartSeries>
           <ChartSeriesItem
-            type="donut"
+            type="pie"
             data={energyData}
             categoryField="name"
             field="amount"
