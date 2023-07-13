@@ -7,10 +7,10 @@ import {
     ChartCategoryAxis,
     ChartCategoryAxisItem,
   } from "@progress/kendo-react-charts";
-import { GenerationTypeChartProps} from "../GenerationType";
+import { SingleDimProps } from "../Chart";
 
   
-const Column: React.FC<GenerationTypeChartProps> = ({ data } : GenerationTypeChartProps) => {
+const Column: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     return (
       data && 
       <>

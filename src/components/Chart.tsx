@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GenerationTypeChart, { GenerationType } from "./GenerationType";
+import GenerationTypeChart from "./GenerationType";
 import React from "react";
 
 export enum DataType {
@@ -7,11 +7,25 @@ export enum DataType {
 }
 
 export enum ChartStyle {
-    donut
+    donut,
+    column
 }
 
-export interface ChartProps {}
+export class SingleDimDataPoint {
+    name: string;
+    amount: number;
+    colour: string; 
 
+    constructor(name : string, amount : number, colour : string) {
+        this.name = name;
+        this.amount = amount;
+        this.colour = colour;
+    }
+}
+
+export interface SingleDimProps{
+    data: SingleDimDataPoint[];
+}
 interface Props {
     dataType: DataType,
     chartStyle: ChartStyle

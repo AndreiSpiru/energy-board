@@ -1,19 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { ChartProps, ChartStyle } from "./Chart";
+import { ChartStyle, SingleDimDataPoint } from "./Chart";
 import Donut from "./charts/Donut";
+import Column from "./charts/Column";
 
-export class GenerationType {
-    name: string;
-    amount: number;
-    colour: string; 
-
-    constructor(name : string, amount : number, colour : string) {
-        this.name = name;
-        this.amount = amount;
-        this.colour = colour;
-    }
-}
 
 interface GenerationTypeJSON {
     fuelType: string;
@@ -31,9 +21,6 @@ const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summar
 
 const smallestPercentageDisplayed = 0.01;
 
-export interface GenerationTypeChartProps extends ChartProps{
-    data: GenerationType[];
-}
 
 interface Props {
     data: GenerationTypeDataPoint[];
@@ -42,14 +29,14 @@ interface Props {
 
 const GenerationTypeChart : React.FC<Props> = (props : Props) => {
     if (props.data.length > 0) {
-        let list : GenerationType[] = props.data[0].data.map((d) => new GenerationType(d.fuelType, d.generation, "#FFFFFF"));
-        let generationData : GenerationType[] = [];
+        let list : SingleDimDataPoint[] = props.data[0].data.map((d) => new SingleDimDataPoint(d.fuelType, d.generation, "#FFFFFF"));
+        let generationData : SingleDimDataPoint[] = [];
         let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
         for (let e of list) {
             if (e.amount / totalGenerated < smallestPercentageDisplayed) {
                 let other = generationData.find(d => d.name === "Other");
                 if (other == null) {
-                    generationData.push(new GenerationType("Other", e.amount, "#000000"));
+                    generationData.push(new SingleDimDataPoint("Other", e.amount, "#000000"));
                 } else {
                     other.amount += e.amount;
                 }
@@ -60,6 +47,8 @@ const GenerationTypeChart : React.FC<Props> = (props : Props) => {
         switch (props.chartStyle) {
             case ChartStyle.donut:
                 return <Donut data={generationData}/>;
+            case ChartStyle.column:
+                return <Column data={generationData}/>;
         }
     }   else {
         return <></>
