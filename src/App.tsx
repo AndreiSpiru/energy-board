@@ -2,6 +2,7 @@ import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
 import Chart, { DataType, ChartStyle } from "./components/Chart";
+import ChartDisplay from "./components/ChartDisplay";
 
 function App() {
   return (
@@ -9,9 +10,7 @@ function App() {
       <div className="container">
         <h1>National grid: Live</h1>
         <ul className= "flex-container">
-          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.pie}/></li>
-          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.bar}/></li>
-          <li><Chart dataType={DataType.generationTypeOverTime} chartStyle={ChartStyle.stackedArea}/></li>
+          <li><ChartDisplay/></li>
         </ul>
       </div>
     </div>
