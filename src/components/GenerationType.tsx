@@ -16,9 +16,6 @@ interface GenerationTypeDataPoint {
     data: Array<GenerationTypeJSON>;
 }
 
-
-const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
-
 const smallestProportionDisplayed = 0.01;
 
 
