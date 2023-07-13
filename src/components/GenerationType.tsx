@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { ChartProps } from "./Chart";
+import { ChartProps, ChartStyle } from "./Chart";
 import Donut from "./charts/Donut";
 
 export class GenerationType {
@@ -37,26 +37,33 @@ export interface GenerationTypeChartProps extends ChartProps{
 
 interface Props {
     data: GenerationTypeDataPoint[];
-    children: JSX.Element;
+    chartStyle: ChartStyle;
 }
 
 const GenerationTypeChart : React.FC<Props> = (props : Props) => {
-    let list : GenerationType[] = props.data[0].data.map((d) => new GenerationType(d.fuelType, d.generation, "#FFFFFF"));
-    let generationData : GenerationType[] = [];
-    let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
-    for (let e of list) {
-        if (e.amount / totalGenerated < smallestPercentageDisplayed) {
-            let other = generationData.find(d => d.name === "Other");
-            if (other == null) {
-                generationData.push(new GenerationType("Other", e.amount, "#000000"));
+    if (props.data.length > 0) {
+        let list : GenerationType[] = props.data[0].data.map((d) => new GenerationType(d.fuelType, d.generation, "#FFFFFF"));
+        let generationData : GenerationType[] = [];
+        let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
+        for (let e of list) {
+            if (e.amount / totalGenerated < smallestPercentageDisplayed) {
+                let other = generationData.find(d => d.name === "Other");
+                if (other == null) {
+                    generationData.push(new GenerationType("Other", e.amount, "#000000"));
+                } else {
+                    other.amount += e.amount;
+                }
             } else {
-                other.amount += e.amount;
+                generationData.push(e);
             }
-        } else {
-            generationData.push(e);
         }
+        switch (props.chartStyle) {
+            case ChartStyle.donut:
+                return <Donut data={generationData}/>;
+        }
+    }   else {
+        return <></>
     }
-    return React.cloneElement(props.children, { generationData });
 }
 
 export default GenerationTypeChart;
