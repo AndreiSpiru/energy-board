@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { ChartStyle, SingleDimDataPoint } from "./Chart";
-import Donut from "./charts/Donut";
-import Column from "./charts/Column";
+import Pie from "./charts/Pie";
+import Bar from "./charts/Bar";
 
 
 interface GenerationTypeJSON {
@@ -45,10 +45,10 @@ const GenerationTypeChart : React.FC<Props> = (props : Props) => {
             }
         }
         switch (props.chartStyle) {
-            case ChartStyle.donut:
-                return <Donut data={generationData}/>;
-            case ChartStyle.column:
-                return <Column data={generationData}/>;
+            case ChartStyle.pie:
+                return <Pie data={generationData}/>;
+            case ChartStyle.bar:
+                return <Bar data={generationData}/>;
         }
     }   else {
         return <></>

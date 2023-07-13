@@ -9,8 +9,8 @@ function App() {
       <div className="container">
         <h1>National grid: Live</h1>
         <ul className= "flex-container">
-          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.donut}/></li>
-          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.column}/></li>
+          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.pie}/></li>
+          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.bar}/></li>
         </ul>
       </div>
     </div>
