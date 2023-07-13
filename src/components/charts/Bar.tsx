@@ -11,7 +11,7 @@ import {
 import { SingleDimProps } from "../Chart";
 import { COLORS } from "../../constants";
 
-
+  
 const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     return (
       data && 
@@ -21,8 +21,8 @@ const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
         width: '30vw', 
         }}>
             <ChartArea background={COLORS.chartBg}/>
-            <ChartTitle text="Bar chart" color={COLORS.chartTitle}/>
-            <ChartLegend position="top" orientation="horizontal" />
+            <ChartTitle text="Bar chart" />
+            <ChartLegend position="top" orientation="horizontal"  />
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={[]} startAngle={45} />
             </ChartCategoryAxis>

@@ -11,10 +11,10 @@ function chartStyleFromString(s : string): ChartStyle {
             return ChartStyle.bar;
         case "Pie":
             return ChartStyle.pie;
-        case "Stacked Area":
-            return ChartStyle.stackedArea;
         case "Bar Over Time":
             return ChartStyle.barOverTime;
+        case "Stacked Area":
+            return ChartStyle.stackedArea;
         default:
             return ChartStyle.stackedArea;
     }
