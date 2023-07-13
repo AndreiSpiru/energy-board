@@ -5,8 +5,10 @@ import {
     ChartSeries,
     ChartSeriesItem,
     ChartSeriesLabels,
+    ChartArea,
   } from "@progress/kendo-react-charts";
 import { SingleDimProps } from "../Chart";
+import { COLORS } from "../../constants";
 
   
   // Show category label for each item in the donut graph
@@ -23,6 +25,7 @@ const Pie: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
         height: '30vw',
         width: '30vw',
       }}>
+        <ChartArea background={COLORS.chartBg}/>
         <ChartTitle text="Energy source distribution" />
         <ChartLegend visible={false} />
         <ChartSeries>

@@ -6,8 +6,10 @@ import {
     ChartSeriesItem,
     ChartCategoryAxis,
     ChartCategoryAxisItem,
+    ChartArea,
   } from "@progress/kendo-react-charts";
 import { SingleDimProps } from "../Chart";
+import { COLORS } from "../../constants";
 
   
 const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
@@ -18,6 +20,7 @@ const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
         height: '30vw',
         width: '30vw', 
         }}>
+            <ChartArea background={COLORS.chartBg}/>
             <ChartTitle text="Bar chart" />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>

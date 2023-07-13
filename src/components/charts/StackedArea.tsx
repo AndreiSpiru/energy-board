@@ -6,8 +6,10 @@ import {
     ChartSeriesItem,
     ChartCategoryAxis,
     ChartCategoryAxisItem,
+    ChartArea,
   } from "@progress/kendo-react-charts";
 import { TwoDimProps } from "../Chart";
+import { COLORS } from "../../constants";
 
 interface StackedAreaSeries {
     label: string;
@@ -41,6 +43,7 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
         height: '30vw',
         width: '80vw', 
         }}>
+            <ChartArea background={COLORS.chartBg}/>
             <ChartTitle text="Stacked area chart" />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
