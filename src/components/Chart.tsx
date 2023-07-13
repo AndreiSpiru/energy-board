@@ -8,7 +8,9 @@ export enum DataType {
     generationType,
     generationTypeOverTime,
     generationForecastType,
-    generationForecastOverTimeType
+    generationForecastOverTimeType,
+    generationForecastLongType,
+    generationForecastOverLongTimeType,
 }
 
 export enum ChartStyle {
@@ -60,6 +62,9 @@ function getUrl(type: DataType): string{
         case DataType.generationForecastType:
         case DataType.generationForecastOverTimeType:
             return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/availability/summary/14D";
+        case DataType.generationForecastLongType:
+        case DataType.generationForecastOverLongTimeType:
+            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/availability/summary/3YW";
         default:
             return "";
     }
@@ -82,8 +87,10 @@ const Chart : React.FC<Props> = (props : Props) => {
                 return <GenerationTypeChart data={data} chartStyle={props.chartStyle}/>
             case DataType.generationTypeOverTime:
                 return <GenerationTypeOverTimeChart data={data} chartStyle={props.chartStyle}/>
+            case DataType.generationForecastLongType:
             case DataType.generationForecastType:
                 return <GenerationForecastTypeChart data={data} chartStyle={props.chartStyle} overTime={false}/>
+            case DataType.generationForecastOverLongTimeType:
             case DataType.generationForecastOverTimeType:
                 return <GenerationForecastTypeChart data={data} chartStyle={props.chartStyle} overTime={true}/>
             default:

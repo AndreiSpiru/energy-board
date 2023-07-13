@@ -11,9 +11,13 @@ function App() {
         <ul className= "flex-container">
           <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.pie}/></li>
           <li><Chart dataType={DataType.generationForecastType} chartStyle={ChartStyle.pie}/></li>
+          <li><Chart dataType={DataType.generationForecastLongType} chartStyle={ChartStyle.pie}/></li>
           <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.bar}/></li>
+          <li><Chart dataType={DataType.generationForecastType} chartStyle={ChartStyle.bar}/></li>
+          <li><Chart dataType={DataType.generationForecastLongType} chartStyle={ChartStyle.bar}/></li>
           <li><Chart dataType={DataType.generationTypeOverTime} chartStyle={ChartStyle.stackedArea}/></li>
           <li><Chart dataType={DataType.generationForecastOverTimeType} chartStyle={ChartStyle.stackedArea}/></li>
+          <li><Chart dataType={DataType.generationForecastOverLongTimeType} chartStyle={ChartStyle.stackedArea}/></li>
         </ul>
       </div>
     </div>
