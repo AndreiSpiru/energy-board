@@ -14,7 +14,7 @@ import { SingleDimProps } from "../Chart";
 
 
   
-const Donut: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
+const Pie: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     
     return (
       data && 
@@ -44,4 +44,4 @@ const Donut: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     );
   };
   
-  export default Donut;
+  export default Pie;

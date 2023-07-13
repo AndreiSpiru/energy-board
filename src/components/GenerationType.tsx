@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { ChartStyle, SingleDimDataPoint } from "./Chart";
-import Donut from "./charts/Donut";
-import Column from "./charts/Column";
+import Pie from "./charts/Pie";
+import Bar from "./charts/Bar";
 
 
 interface GenerationTypeJSON {
@@ -16,7 +16,7 @@ interface GenerationTypeDataPoint {
     data: Array<GenerationTypeJSON>;
 }
 
-const smallestPercentageDisplayed = 0.01;
+const smallestProportionDisplayed = 0.01;
 
 interface Props {
     data: GenerationTypeDataPoint[];
@@ -29,7 +29,7 @@ const GenerationTypeChart : React.FC<Props> = (props : Props) => {
         let generationData : SingleDimDataPoint[] = [];
         let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
         for (let e of list) {
-            if (e.amount / totalGenerated < smallestPercentageDisplayed) {
+            if (e.amount / totalGenerated < smallestProportionDisplayed) {
                 let other = generationData.find(d => d.name === "Other");
                 if (other == null) {
                     generationData.push(new SingleDimDataPoint("Other", e.amount, "#000000"));
@@ -41,10 +41,10 @@ const GenerationTypeChart : React.FC<Props> = (props : Props) => {
             }
         }
         switch (props.chartStyle) {
-            case ChartStyle.donut:
-                return <Donut data={generationData}/>;
-            case ChartStyle.column:
-                return <Column data={generationData}/>;
+            case ChartStyle.pie:
+                return <Pie data={generationData}/>;
+            case ChartStyle.bar:
+                return <Bar data={generationData}/>;
         }
     }   else {
         return <></>

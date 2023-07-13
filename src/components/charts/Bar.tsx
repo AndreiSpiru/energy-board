@@ -10,7 +10,7 @@ import {
 import { SingleDimProps } from "../Chart";
 
   
-const Column: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
+const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     return (
       data && 
       <>
@@ -18,7 +18,7 @@ const Column: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
         height: '30vw',
         width: '30vw', 
         }}>
-            <ChartTitle text="Column Chart" />
+            <ChartTitle text="Bar chart" />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={[]} startAngle={45} />
@@ -39,4 +39,4 @@ const Column: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     );
   };
   
-  export default Column;
+  export default Bar;

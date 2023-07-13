@@ -7,8 +7,8 @@ export enum DataType {
 }
 
 export enum ChartStyle {
-    donut,
-    column
+    pie,
+    bar
 }
 
 export class SingleDimDataPoint {
