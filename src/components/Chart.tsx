@@ -39,7 +39,7 @@ export class TwoDimDataPoint {
 }
 
 export interface TwoDimProps {
-    data: TwoDimDataPoint[];
+    points: TwoDimDataPoint[];
 }
 
 interface Props {
