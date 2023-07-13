@@ -19,7 +19,7 @@ export const DataTypes = [
     {name: "generationType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastLongType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
-    {name: "generationOverTimeType", supportedCharts: [ChartStyle.stackedArea]},
+    {name: "generationTypeOverTime", supportedCharts: [ChartStyle.stackedArea]},
     {name: "generationForecastOverTimeType", supportedCharts: [ChartStyle.stackedArea]},
     {name: "generationForecastOverLongTimeType", supportedCharts: [ChartStyle.stackedArea]}
 ];
@@ -60,7 +60,7 @@ interface Props {
     chartStyle: ChartStyle
 }
 
-function getUrl(type: DataType): string{
+function getUrl(type: DataType): string {
     switch(type.name){
         case "generationType":
             return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
@@ -86,7 +86,7 @@ const Chart : React.FC<Props> = (props : Props) => {
 
     useEffect(() => {
         fetchInfo()
-    }, []);
+    }, [props.dataType]);
 
     if(!(data == null))
     {

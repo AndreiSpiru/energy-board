@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Chart, { ChartStyle, DataType, DataTypes, getDataType } from "./Chart"
 
 interface Props {
@@ -35,11 +35,11 @@ const ChartDisplay : React.FC<Props> = () => {
     }
 
     return (<>
-        <ul className= "flex-container">
+        <ul className= "flex-container"> 
             <label className="select" htmlFor="slct">
                 <select id="slct" onChange={changeDataType}>
-                    <option value={"generationType"}>Energy Generation Type</option>
-                    <option value={"generationTypeOverTime"}>Energy Generation Type Over Time</option>
+                    {DataTypes.map(type => 
+                            <option value={type.name}>{type.name}</option>)}
                 </select>
                 <svg>
                     <use xlinkHref="#select-arrow-down"></use>

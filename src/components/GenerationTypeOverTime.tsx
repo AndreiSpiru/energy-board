@@ -1,10 +1,7 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { ChartStyle, SingleDimDataPoint, TwoDimDataPoint } from "./Chart";
 import StackedArea from "./charts/StackedArea";
 import { GenerationTypeDataPoint } from "./GenerationType";
-
-
 
 interface Props {
     data: GenerationTypeDataPoint[];
