@@ -39,18 +39,19 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
       <>
       <Chart style={{ 
         height: '30vw',
-        width: '30vw', 
+        width: '70vw', 
         }}>
             <ChartTitle text="Stacked area chart" />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={labels} startAngle={45} />
+              <ChartCategoryAxisItem categories={labels}/>
             </ChartCategoryAxis>
             <ChartSeries>
               {serieses.map((d, idx) => (
                 <ChartSeriesItem
                   key={idx}
                   type="area"
+                  stack = {true}
                   tooltip={{ visible: true }}
                   data={d.data}
                   name={d.label}
