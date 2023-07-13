@@ -6,8 +6,7 @@ import {
     ChartSeriesItem,
     ChartSeriesLabels,
   } from "@progress/kendo-react-charts";
-import { COLORS } from "../../constants";
-import { GenerationTypeChartProps} from "../GenerationType";
+import { SingleDimProps } from "../Chart";
 
   
   // Show category label for each item in the donut graph
@@ -15,7 +14,7 @@ import { GenerationTypeChartProps} from "../GenerationType";
 
 
   
-const Donut: React.FC<GenerationTypeChartProps> = ({ energyData: data } : GenerationTypeChartProps) => {
+const Pie: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     
     return (
       data && 
@@ -45,4 +44,4 @@ const Donut: React.FC<GenerationTypeChartProps> = ({ energyData: data } : Genera
     );
   };
   
-  export default Donut;
+  export default Pie;

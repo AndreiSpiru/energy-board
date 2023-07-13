@@ -1,17 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { ChartStyle, SingleDimDataPoint } from "./Chart";
+import Pie from "./charts/Pie";
+import Bar from "./charts/Bar";
 
-export class GenerationType {
-    name: string;
-    amount: number;
-    colour: string; 
-
-    constructor(name : string, amount : number, colour : string) {
-        this.name = name;
-        this.amount = amount;
-        this.colour = colour;
-    }
-}
 
 interface GenerationTypeJSON {
     fuelType: string;
@@ -29,51 +21,38 @@ const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summar
 
 const smallestProportionDisplayed = 0.01;
 
-export interface GenerationTypeChartProps {
-    energyData: GenerationType[];
-}
 
 interface Props {
-    chart: React.FC<GenerationTypeChartProps>;
+    data: GenerationTypeDataPoint[];
+    chartStyle: ChartStyle;
 }
 
-const GenerationTypeChart : React.FC<Props> = ({ chart } : Props) => {
-    const [data, setData] = useState<GenerationTypeDataPoint[]>([]);
-
-    const fetchInfo = () => {
-        return fetch(url).then((res) => res.json()).then((res) => setData(res));
-    }
-
-    useEffect(() => {
-        fetchInfo()
-    }, []);
-
-    if(data.length > 0)
-    {
-        //console.log(data);
-        let list : GenerationType[] = data[0].data.map((d) => new GenerationType(d.fuelType, d.generation, "#FFFFFF"));
-        let props : GenerationTypeChartProps = {energyData: []};
+const GenerationTypeChart : React.FC<Props> = (props : Props) => {
+    if (props.data.length > 0) {
+        let list : SingleDimDataPoint[] = props.data[0].data.map((d) => new SingleDimDataPoint(d.fuelType, d.generation, "#FFFFFF"));
+        let generationData : SingleDimDataPoint[] = [];
         let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
         for (let e of list) {
             if (e.amount / totalGenerated < smallestProportionDisplayed) {
                 let other = props.energyData.find(d => d.name === "Other");
                 if (other == null) {
-                    props.energyData.push(new GenerationType("Other", e.amount, "#000000"));
+                    generationData.push(new SingleDimDataPoint("Other", e.amount, "#000000"));
                 } else {
                     other.amount += e.amount;
                 }
             } else {
-                props.energyData.push(e);
+                generationData.push(e);
             }
         }
-        return chart(props);
+        switch (props.chartStyle) {
+            case ChartStyle.pie:
+                return <Pie data={generationData}/>;
+            case ChartStyle.bar:
+                return <Bar data={generationData}/>;
+        }
+    }   else {
+        return <></>
     }
-    else{
-        return(
-            <></>
-        )
-    }
-    
 }
 
 export default GenerationTypeChart;

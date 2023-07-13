@@ -7,24 +7,24 @@ import {
     ChartCategoryAxis,
     ChartCategoryAxisItem,
   } from "@progress/kendo-react-charts";
-import { GenerationTypeChartProps} from "../GenerationType";
+import { SingleDimProps } from "../Chart";
 
   
-const Column: React.FC<GenerationTypeChartProps> = ({ energyData } : GenerationTypeChartProps) => {
+const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
     return (
-      energyData && 
+      data && 
       <>
       <Chart style={{ 
         height: '30vw',
         width: '30vw', 
         }}>
-            <ChartTitle text="Column Chart" />
+            <ChartTitle text="Bar chart" />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={[]} startAngle={45} />
             </ChartCategoryAxis>
             <ChartSeries>
-              {energyData.map((item, idx) => (
+              {data.map((item, idx) => (
                 <ChartSeriesItem
                   key={idx}
                   type="column"
@@ -39,4 +39,4 @@ const Column: React.FC<GenerationTypeChartProps> = ({ energyData } : GenerationT
     );
   };
   
-  export default Column;
+  export default Bar;

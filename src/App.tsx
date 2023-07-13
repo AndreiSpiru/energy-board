@@ -1,9 +1,7 @@
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import "./App.css";
-import Donut from "./components/charts/Donut";
-import GenerationTypeChart from "./components/GenerationType";
-import Column from "./components/charts/Column";
+import Chart, { DataType, ChartStyle } from "./components/Chart";
 
 function App() {
   return (
@@ -11,10 +9,8 @@ function App() {
       <div className="container">
         <h1>National grid: Live</h1>
         <ul className= "flex-container">
-          <li><GenerationTypeChart chart={Donut} /></li>
-          <li><GenerationTypeChart chart={Donut} /></li>
-          <li><GenerationTypeChart chart={Donut} /></li>
-          <li><GenerationTypeChart chart={Column} /></li>
+          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.pie}/></li>
+          <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.bar}/></li>
         </ul>
       </div>
     </div>
