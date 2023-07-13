@@ -29,11 +29,11 @@ export interface SingleDimProps{
 
 export interface TwoDimDataPoint {
     label: string;
-    data: SingleDimDataPoint;
+    data: SingleDimDataPoint[];
 }
 
 export interface TwoDimProps {
-    data: TwoDimDataPoint[];
+    points: TwoDimDataPoint[];
 }
 
 interface Props {
