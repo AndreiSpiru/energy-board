@@ -10,7 +10,8 @@ export enum DataType {
 
 export enum ChartStyle {
     pie,
-    bar
+    bar,
+    stackedArea
 }
 
 export class SingleDimDataPoint {

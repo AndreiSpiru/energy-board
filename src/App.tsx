@@ -11,6 +11,7 @@ function App() {
         <ul className= "flex-container">
           <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.pie}/></li>
           <li><Chart dataType={DataType.generationType} chartStyle={ChartStyle.bar}/></li>
+          <li><Chart dataType={DataType.generationTypeOverTime} chartStyle={ChartStyle.stackedArea}/></li>
         </ul>
       </div>
     </div>

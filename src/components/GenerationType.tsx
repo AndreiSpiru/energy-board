@@ -42,13 +42,12 @@ const GenerationTypeChart : React.FC<Props> = (props : Props) => {
         }
         switch (props.chartStyle) {
             case ChartStyle.pie:
-                return <Pie data={generationData}/>;
+                return (<Pie data={generationData}/>);
             case ChartStyle.bar:
-                return <Bar data={generationData}/>;
+                return (<Bar data={generationData}/>);
         }
-    }   else {
-        return <></>
     }
+    return <></>;
 }
 
 export default GenerationTypeChart;

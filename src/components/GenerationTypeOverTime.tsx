@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { ChartStyle, SingleDimDataPoint, TwoDimDataPoint } from "./Chart";
+import StackedArea from "./charts/StackedArea";
 
 
 
@@ -61,12 +62,11 @@ const GenerationTypeOverTimeChart : React.FC<Props> = (props : Props) => {
             generationData.push(e);
         }
         switch (props.chartStyle) {
-                    case ChartStyle.bar:
-                        return <Bar data={generationData}/>;
+                    case ChartStyle.stackedArea:
+                        return (<StackedArea points={generationData}/>);
         }
-    }  else {
-        return <></>
-    }
+    } 
+    return <></>;
 }
 
 export default GenerationTypeOverTimeChart;
