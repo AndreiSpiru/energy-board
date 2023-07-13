@@ -23,9 +23,14 @@ export class SingleDimDataPoint {
     }
 }
 
-export interface SingleDimProps{
+export interface SingleDimProps {
     data: SingleDimDataPoint[];
 }
+
+export interface TwoDimProps {
+    data: SingleDimProps[];
+}
+
 interface Props {
     dataType: DataType,
     chartStyle: ChartStyle
