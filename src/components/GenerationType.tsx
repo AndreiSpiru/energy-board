@@ -16,11 +16,7 @@ interface GenerationTypeDataPoint {
     data: Array<GenerationTypeJSON>;
 }
 
-
-const url = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
-
 const smallestProportionDisplayed = 0.01;
-
 
 interface Props {
     data: GenerationTypeDataPoint[];
@@ -46,13 +42,12 @@ const GenerationTypeChart : React.FC<Props> = (props : Props) => {
         }
         switch (props.chartStyle) {
             case ChartStyle.pie:
-                return <Pie data={generationData}/>;
+                return (<Pie data={generationData}/>);
             case ChartStyle.bar:
-                return <Bar data={generationData}/>;
+                return (<Bar data={generationData}/>);
         }
-    }   else {
-        return <></>
     }
+    return <></>;
 }
 
 export default GenerationTypeChart;
