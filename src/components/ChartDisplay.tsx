@@ -1,28 +1,17 @@
-import { useState } from "react"
-import Chart, { ChartStyle, DataType } from "./Chart"
+import { useEffect, useState } from "react"
+import Chart, { ChartStyle, DataType, DataTypes, getDataType } from "./Chart"
 
 interface Props {
 
 }
 
-function dataTypeFromString(s : string): DataType {
-    switch(s) {
-        case "generationType":
-            return DataType.generationType;
-        case "generationTypeOverTime":
-            return DataType.generationTypeOverTime;
-        default:
-            return DataType.generationType;
-    }
-}
-
 function chartStyleFromString(s : string): ChartStyle {
     switch(s) {
-        case "bar":
+        case "Bar":
             return ChartStyle.bar;
-        case "pie":
+        case "Pie":
             return ChartStyle.pie;
-        case "stackedArea":
+        case "Stacked Area":
             return ChartStyle.stackedArea;
         default:
             return ChartStyle.stackedArea;
@@ -30,14 +19,18 @@ function chartStyleFromString(s : string): ChartStyle {
 }
 
 const ChartDisplay : React.FC<Props> = () => {
-    const [dataType, setDataType] = useState<DataType>(DataType.generationType);
-    const [chartStyle, setChartStyle] = useState<ChartStyle>(ChartStyle.pie);
+    const [dataType, setDataType] = useState<DataType>(getDataType("generationType"));
+    const [chartStyle, setChartStyle] = useState<ChartStyle>(ChartStyle.bar);
 
     function changeDataType(event : React.ChangeEvent<HTMLSelectElement>) {
-        setDataType(dataTypeFromString(event.target.value));
+        //console.log(event.target.value, getDataType(event.target.value))
+        let newType = getDataType(event.target.value);
+        setDataType(newType);
+        setChartStyle(newType.supportedCharts[0]);
     }
 
     function changeChartStyle(event : React.ChangeEvent<HTMLSelectElement>) {
+        //console.log(event.target.value, chartStyleFromString(event.target.value))
         setChartStyle(chartStyleFromString(event.target.value));
     }
 
@@ -47,9 +40,8 @@ const ChartDisplay : React.FC<Props> = () => {
             <option value={"generationTypeOverTime"}>Energy Generation Type Over Time</option>
         </select>
         <select onChange={changeChartStyle}>
-            <option value={"pie"}>Pie</option>
-            <option value={"bar"}>Bar</option>
-            <option value={"stackedArea"}>Stacked Area</option>
+            {dataType.supportedCharts.map(style => 
+                <option value={style}>{style}</option>)}
         </select>
         <Chart dataType={dataType} chartStyle={chartStyle}/>
         </>

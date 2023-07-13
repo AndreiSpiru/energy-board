@@ -3,16 +3,23 @@ import GenerationTypeChart from "./GenerationType";
 import React from "react";
 import GenerationTypeOverTimeChart from "./GenerationTypeOverTime";
 
-export enum DataType {
-    generationType,
-    generationTypeOverTime
+export interface DataType {
+    name: string;
+    supportedCharts: ChartStyle[];
 }
 
 export enum ChartStyle {
-    pie,
-    bar,
-    stackedArea
+    pie = "Pie",
+    bar = "Bar",
+    stackedArea = "Stacked Area"
 }
+
+export const DataTypes = [
+    {name: "generationType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
+    {name: "generationTypeOverTime", supportedCharts: [ChartStyle.stackedArea]}
+];
+
+export function getDataType(name:string) {return DataTypes.find(d => d.name === name) ?? DataTypes[0];}
 
 export class SingleDimDataPoint {
     name: string;
@@ -49,15 +56,16 @@ interface Props {
 }
 
 function getUrl(type: DataType): string{
-    switch(type){
-        case DataType.generationType:
+    switch(type.name){
+        case "generationType":
             return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
-        case DataType.generationTypeOverTime:
+        case "generationTypeOverTime":
             return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary";
         default:
             return "";
     }
 }
+
 const Chart : React.FC<Props> = (props : Props) => {
     const [data, setData] = useState();
 
@@ -71,10 +79,10 @@ const Chart : React.FC<Props> = (props : Props) => {
 
     if(!(data == null))
     {
-        switch (props.dataType) {
-            case DataType.generationType:
+        switch (props.dataType.name) {
+            case "generationType":
                 return <GenerationTypeChart data={data} chartStyle={props.chartStyle}/>
-            case DataType.generationTypeOverTime:
+            case "generationTypeOverTime":
                 return <GenerationTypeOverTimeChart data={data} chartStyle={props.chartStyle}/>
             default:
                 return (<></>)
