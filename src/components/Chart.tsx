@@ -4,8 +4,8 @@ import React from "react";
 import GenerationTypeOverTimeChart from "./GenerationTypeOverTime";
 
 export enum DataType {
-    generationType = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12",
-    generationTypeOverTime = "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary"
+    generationType,
+    generationTypeOverTime
 }
 
 export enum ChartStyle {
@@ -48,11 +48,21 @@ interface Props {
     chartStyle: ChartStyle
 }
 
+function getUrl(type: DataType): string{
+    switch(type){
+        case DataType.generationType:
+            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
+        case DataType.generationTypeOverTime:
+            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary";
+        default:
+            return "";
+    }
+}
 const Chart : React.FC<Props> = (props : Props) => {
     const [data, setData] = useState();
 
     const fetchInfo = () => {
-        return fetch(props.dataType).then((res) => res.json()).then((res) => setData(res));
+        return fetch(getUrl(props.dataType)).then((res) => res.json()).then((res) => setData(res));
     }
 
     useEffect(() => {
