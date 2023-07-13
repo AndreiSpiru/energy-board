@@ -5,12 +5,12 @@ import Pie from "./charts/Pie";
 import Bar from "./charts/Bar";
 
 
-interface GenerationTypeJSON {
+export interface GenerationTypeJSON {
     fuelType: string;
     generation: number;
 }
 
-interface GenerationTypeDataPoint {
+export interface GenerationTypeDataPoint {
     startTime : string;
     settlementPeriod: number;
     data: Array<GenerationTypeJSON>;

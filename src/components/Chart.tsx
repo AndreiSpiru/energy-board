@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import GenerationTypeChart from "./GenerationType";
 import React from "react";
 import GenerationTypeOverTimeChart from "./GenerationTypeOverTime";
+import GenerationForecastTypeChart from "./GenerationForecastType";
 
 export enum DataType {
     generationType,
-    generationTypeOverTime
+    generationTypeOverTime,
+    generationForecastType,
+    generationForecastOverTimeType
 }
 
 export enum ChartStyle {
@@ -54,6 +57,9 @@ function getUrl(type: DataType): string{
             return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
         case DataType.generationTypeOverTime:
             return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary";
+        case DataType.generationForecastType:
+        case DataType.generationForecastOverTimeType:
+            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/availability/summary/14D";
         default:
             return "";
     }
@@ -76,6 +82,10 @@ const Chart : React.FC<Props> = (props : Props) => {
                 return <GenerationTypeChart data={data} chartStyle={props.chartStyle}/>
             case DataType.generationTypeOverTime:
                 return <GenerationTypeOverTimeChart data={data} chartStyle={props.chartStyle}/>
+            case DataType.generationForecastType:
+                return <GenerationForecastTypeChart data={data} chartStyle={props.chartStyle} overTime={false}/>
+            case DataType.generationForecastOverTimeType:
+                return <GenerationForecastTypeChart data={data} chartStyle={props.chartStyle} overTime={true}/>
             default:
                 return (<></>)
         }

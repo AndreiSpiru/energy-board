@@ -39,12 +39,12 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
       <>
       <Chart style={{ 
         height: '30vw',
-        width: '70vw', 
+        width: '80vw', 
         }}>
             <ChartTitle text="Stacked area chart" />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={labels}/>
+              <ChartCategoryAxisItem categories={labels} max={24}/>
             </ChartCategoryAxis>
             <ChartSeries>
               {serieses.map((d, idx) => (
