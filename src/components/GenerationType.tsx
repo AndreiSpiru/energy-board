@@ -34,7 +34,7 @@ const GenerationTypeChart : React.FC<Props> = (props : Props) => {
         let totalGenerated = list.reduce((acc, e) => acc + e.amount, 0);
         for (let e of list) {
             if (e.amount / totalGenerated < smallestProportionDisplayed) {
-                let other = props.energyData.find(d => d.name === "Other");
+                let other = generationData.find(d => d.name === "Other");
                 if (other == null) {
                     generationData.push(new SingleDimDataPoint("Other", e.amount, "#000000"));
                 } else {
