@@ -33,7 +33,7 @@ export interface TwoDimDataPoint {
 }
 
 export interface TwoDimProps {
-    data: TwoDimDataPoint;
+    data: TwoDimDataPoint[];
 }
 
 interface Props {
