@@ -44,10 +44,10 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
         width: '80vw', 
         }}>
             <ChartArea background={COLORS.chartBg}/>
-            <ChartTitle text="Stacked area chart" />
+            <ChartTitle text="Stacked area chart" color={COLORS.chartTitle} />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={labels} max={21}/>
+              <ChartCategoryAxisItem categories={labels} max={21} color={COLORS.chartLabels}/>
             </ChartCategoryAxis>
             <ChartSeries>
               {serieses.map((d, idx) => (
@@ -55,7 +55,7 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
                   key={idx}
                   type="area"
                   stack={true}
-                  tooltip={{ visible: true }}
+                  tooltip={{ visible: true} }
                   data={d.data}
                   name={d.label}
                 />
