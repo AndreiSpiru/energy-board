@@ -51,6 +51,7 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
                 <ChartSeriesItem
                   key={idx}
                   type="area"
+                  stack={true}
                   tooltip={{ visible: true }}
                   data={d.data}
                   name={d.label}
