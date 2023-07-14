@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import Chart, { ChartStyle, DataType, DataTypes, getDataType } from "./Chart"
 import DatePicker from "react-datepicker";
-import { DateSelector } from "./DateSelector";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface Props {
