@@ -64,7 +64,7 @@ const ChartDisplay : React.FC<Props> = () => {
     }
 
     return (<>
-        <ul className= "flex-container"> 
+        <div className="dropdowns"> 
             <label className="select" htmlFor="slct">
                 <select id="slct" onChange={changeDataType}>
                     {DataTypes.map(type => 
@@ -89,9 +89,10 @@ const ChartDisplay : React.FC<Props> = () => {
                     <polyline points="1 1 5 5 9 1"></polyline>
                 </symbol>
             </svg>
-        </ul>
+        </div>
+        <ul className= "flex-container">
         {chartStylesFromString(chartStyle).map(cs =>
-            <Chart dataType={dataType} chartStyle={cs} data={data}/>)}
+            <li><Chart dataType={dataType} chartStyle={cs} data={data}/></li>)}</ul>
         </>
     )
 }
