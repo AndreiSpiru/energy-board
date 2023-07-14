@@ -12,7 +12,7 @@ interface Props {
 
 
 function parseLabels(startTime : string) {
-    return (startTime.slice(2,4) + "/" + startTime.slice(5,7) + "/" + startTime.slice(8,10) + "~" + startTime.slice(12,16))
+    return (startTime.slice(8,10) + "/" + startTime.slice(5,7) + "/" + startTime.slice(0,4) + ((startTime.length > 12) ? "~" + startTime.slice(12,16) : ""));
 }
 
 

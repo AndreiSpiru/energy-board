@@ -7,6 +7,8 @@ import {
     ChartCategoryAxis,
     ChartCategoryAxisItem,
     ChartArea,
+    ChartValueAxis,
+    ChartValueAxisItem,
   } from "@progress/kendo-react-charts";
 import { SingleDimProps, TwoDimProps } from "../Chart";
 import { COLORS, maxNumberofDisplayedElementsbarOverTime } from "../../constants";
@@ -49,6 +51,9 @@ const Bar: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={labels} max = {maxNumberofDisplayedElementsbarOverTime} color={COLORS.chartTitle}/>
             </ChartCategoryAxis>
+            <ChartValueAxis>
+              <ChartValueAxisItem title={{text:"Energy Generated (GW)"}} color={COLORS.chartLabels}/>
+            </ChartValueAxis>
             <ChartSeries>
               {serieses.map((item, idx) => (
                 <ChartSeriesItem

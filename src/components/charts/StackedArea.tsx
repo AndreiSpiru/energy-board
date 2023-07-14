@@ -7,6 +7,8 @@ import {
     ChartCategoryAxis,
     ChartCategoryAxisItem,
     ChartArea,
+    ChartValueAxis,
+    ChartValueAxisItem,
   } from "@progress/kendo-react-charts";
 import { TwoDimProps } from "../Chart";
 import { COLORS, maxNumberofDisplayedElementsStackedArea } from "../../constants";
@@ -41,7 +43,7 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
       <>
       <Chart style={{ 
         height: '30vw',
-        width: '80vw', 
+        width: '80vw'
         }}>
             <ChartArea background={COLORS.chartBg}/>
             <ChartTitle text="Stacked area chart" color={COLORS.chartTitle}/>
@@ -49,6 +51,9 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={labels} max={maxNumberofDisplayedElementsStackedArea} color={COLORS.chartLabels} labels={{rotation:"auto"}}/>
             </ChartCategoryAxis>
+            <ChartValueAxis>
+              <ChartValueAxisItem title={{text:"Energy Generated (GW)"}} color={COLORS.chartLabels}/>
+            </ChartValueAxis>
             <ChartSeries>
               {serieses.map((d, idx) => (
                 <ChartSeriesItem

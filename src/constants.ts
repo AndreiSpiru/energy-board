@@ -4,8 +4,8 @@ export const COLORS = {
   blue: "#3355ff",
   chartBg: "#587E7E",
   pageBg: "#7E7E7E",
-  chartTitle: "#F8F9F9",
-  chartLabels: "#F8F9F9",
+  chartTitle: "#faebd7",
+  chartLabels: "#faebd7",
   buttonBg: "#C4D5D5",
 };
 
