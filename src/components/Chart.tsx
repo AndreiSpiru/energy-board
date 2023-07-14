@@ -13,7 +13,8 @@ export interface DataType {
 export enum ChartStyle {
     pie = "Pie",
     bar = "Bar",
-    stackedArea = "Stacked Area"
+    stackedArea = "Stacked Area",
+    barOverTime = "Bar Over Time"
 }
 
 export const DataTypes = [
@@ -21,8 +22,8 @@ export const DataTypes = [
     {name: "generationForecastType", prettyName: "14 Day Forecast for Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastLongType", prettyName: "3 Year Forecast for Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationTypeOverTime", prettyName: "Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea]},
-    {name: "generationForecastOverTimeType", prettyName: "14 Day Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea]},
-    {name: "generationForecastOverLongTimeType", prettyName: "3 Year Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea]}
+    {name: "generationForecastOverTimeType", prettyName: "14 Day Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
+    {name: "generationForecastOverLongTimeType", prettyName: "3 Year Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]}
 ];
 
 export function getDataType(name:string) {return DataTypes.find(d => d.name === name) ?? DataTypes[0];}
