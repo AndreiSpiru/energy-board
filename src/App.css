@@ -16,6 +16,7 @@
   margin: 0;
   list-style: none;
   gap: 10px;
+  padding-bottom: 10px;
 }
 
 .flex-container {
