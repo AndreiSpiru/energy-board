@@ -44,10 +44,10 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
         width: '80vw', 
         }}>
             <ChartArea background={COLORS.chartBg}/>
-            <ChartTitle text="Stacked area chart" color={COLORS.chartTitle} />
+            <ChartTitle text="Stacked area chart" color={COLORS.chartTitle}/>
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={labels} max={maxNumberofDisplayedElementsStackedArea} color={COLORS.chartLabels}/>
+              <ChartCategoryAxisItem categories={labels} max={maxNumberofDisplayedElementsStackedArea} color={COLORS.chartLabels} labels={{rotation:"auto"}}/>
             </ChartCategoryAxis>
             <ChartSeries>
               {serieses.map((d, idx) => (

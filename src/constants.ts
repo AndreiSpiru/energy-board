@@ -9,6 +9,6 @@ export const COLORS = {
   buttonBg: "#C4D5D5",
 };
 
-export const maxNumberofDisplayedElementsStackedArea : number = 21;
+export const maxNumberofDisplayedElementsStackedArea : number = 30;
 export const maxNumberofDisplayedElementsbarOverTime : number = 7;
   

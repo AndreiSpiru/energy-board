@@ -123,7 +123,7 @@ const ChartDisplay : React.FC<Props> = () => {
                     dateFormat="dd/MM/yyyy"
                     selected={startDate} 
                     onChange={date =>date && (setStartDate(date) === null || setEndDate(getTomorrow(date)))}
-                    includeDateIntervals={[{start: new Date("01/01/2021"),end:  new Date("08/08/2023")}]}
+                    includeDateIntervals={[{start: new Date("01/01/2021"),end: getTomorrow(new Date())}]}
                 />
                 
             </li>
@@ -135,7 +135,7 @@ const ChartDisplay : React.FC<Props> = () => {
                     dateFormat="dd/MM/yyyy"
                     selected={endDate} 
                     onChange={date =>date && setEndDate(date)}
-                    includeDateIntervals={[{start: new Date("01/01/2021"),end:  new Date("08/08/2023")}]}
+                    includeDateIntervals={[{start: new Date("01/01/2021"),end:  getTomorrow(new Date())}]}
                 />
             </li>
             }
