@@ -26,17 +26,17 @@ const Pie: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
         width: '30vw',
       }}>
         <ChartArea background={COLORS.chartBg}/>
-        <ChartTitle text="Energy source distribution" />
+        <ChartTitle text="Energy source distribution" color={COLORS.chartTitle}/>
         <ChartLegend visible={false} />
         <ChartSeries>
           <ChartSeriesItem
             type="pie"
             data={data}
             categoryField="name"
-            field="amount"
+            field="amount" 
           >
             <ChartSeriesLabels
-              color="colour"
+              color={COLORS.chartLabels}
               background="none"
               content={labelContent}
             />

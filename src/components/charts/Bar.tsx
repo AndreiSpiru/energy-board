@@ -22,7 +22,7 @@ const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
         }}>
             <ChartArea background={COLORS.chartBg}/>
             <ChartTitle text="Bar chart" />
-            <ChartLegend position="top" orientation="horizontal" />
+            <ChartLegend position="top" orientation="horizontal"  />
             <ChartCategoryAxis>
               <ChartCategoryAxisItem categories={[]} startAngle={45} />
             </ChartCategoryAxis>

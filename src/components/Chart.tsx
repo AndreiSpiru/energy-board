@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import GenerationTypeChart from "./GenerationType";
 import React from "react";
 import GenerationTypeOverTimeChart from "./GenerationTypeOverTime";
@@ -12,19 +12,41 @@ export interface DataType {
 export enum ChartStyle {
     pie = "Pie",
     bar = "Bar",
-    stackedArea = "Stacked Area"
+    stackedArea = "Stacked Area",
+    barOverTime = "Bar Over Time"
 }
 
 export const DataTypes = [
     {name: "generationType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastLongType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
-    {name: "generationOverTimeType", supportedCharts: [ChartStyle.stackedArea]},
-    {name: "generationForecastOverTimeType", supportedCharts: [ChartStyle.stackedArea]},
-    {name: "generationForecastOverLongTimeType", supportedCharts: [ChartStyle.stackedArea]}
+    {name: "generationTypeOverTime", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
+    {name: "generationForecastOverTimeType", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
+    {name: "generationForecastOverLongTimeType", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]}
 ];
 
 export function getDataType(name:string) {return DataTypes.find(d => d.name === name) ?? DataTypes[0];}
+
+// export function getDataType(name:string) 
+// {
+//     switch(name)
+//     {
+//         case "generationTypeOverTime":
+//             return DataTypes[3];
+//         case "generationType":
+//             return DataTypes[0];
+//         case "generationForecastOverTimeType": 
+//             return DataTypes[4];   
+//         case "generationForecastType":
+//             return DataTypes[1];
+//         case "generationForecastOverLongTimeType":
+//             return DataTypes[5];
+//         case "generationForecastLongType":
+//             return DataTypes[2];
+//         default:
+//             return DataTypes[2];
+//     }
+// }
 
 export class SingleDimDataPoint {
     name: string;
@@ -57,50 +79,29 @@ export interface TwoDimProps {
 
 interface Props {
     dataType: DataType,
-    chartStyle: ChartStyle
+    chartStyle: ChartStyle,
+    data: any
 }
 
-function getUrl(type: DataType): string{
-    switch(type.name){
-        case "generationType":
-            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?from=2023-07-12&to=2023-07-12";
-        case "generationTypeOverTime":
-            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary";
-        case "generationForecastType":
-        case "generationForecastOverTimeType":
-            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/availability/summary/14D";
-        case "generationForecastLongType":
-        case "generationForecastOverLongTimeType":
-            return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/availability/summary/3YW";
-        default:
-            return "";
-    }
-}
 
 const Chart : React.FC<Props> = (props : Props) => {
-    const [data, setData] = useState();
+    
 
-    const fetchInfo = () => {
-        return fetch(getUrl(props.dataType)).then((res) => res.json()).then((res) => setData(res));
-    }
-
-    useEffect(() => {
-        fetchInfo()
-    }, []);
-
-    if(!(data == null))
+    if(!(props.data == null))
     {
+        console.log(props.data, props.dataType);
+
         switch (props.dataType.name) {
             case "generationType":
-                return <GenerationTypeChart data={data} chartStyle={props.chartStyle}/>
+                return <GenerationTypeChart data={props.data} chartStyle={props.chartStyle}/>
             case "generationTypeOverTime":
-                return <GenerationTypeOverTimeChart data={data} chartStyle={props.chartStyle}/>
+                return <GenerationTypeOverTimeChart data={props.data} chartStyle={props.chartStyle}/>
             case "generationForecastLongType":
             case "generationForecastType":
-                return <GenerationForecastTypeChart data={data} chartStyle={props.chartStyle} overTime={false}/>
+                return <GenerationForecastTypeChart data={props.data} chartStyle={props.chartStyle} overTime={false}/>
             case "generationForecastOverLongTimeType":
             case "generationForecastOverTimeType":
-                return <GenerationForecastTypeChart data={data} chartStyle={props.chartStyle} overTime={true}/>
+                return <GenerationForecastTypeChart data={props.data} chartStyle={props.chartStyle} overTime={true}/>
             default:
                 return (<></>)
         }
