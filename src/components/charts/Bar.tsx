@@ -33,15 +33,15 @@ const Bar: React.FC<SingleDimProps> = ({ data } : SingleDimProps) => {
             </ChartValueAxis>
             <ChartSeries>
               {data.map((item, idx) => (
-                <ChartSeriesItem
-                  key={idx}
-                  type="column"
-                  tooltip={{ visible: true }}
-                  data={[item.amount]}
-                  name={item.name}
-                />
-              ))}
-            </ChartSeries>
+                  <ChartSeriesItem
+                    key={idx}
+                    type="column"
+                    tooltip={{ visible: true }}
+                    data={[item.amount]}
+                    name={item.name}
+                  />
+                ))}
+             </ChartSeries>
           </Chart>
       </>
     );
