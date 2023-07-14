@@ -6,6 +6,7 @@ import GenerationForecastTypeChart from "./GenerationForecastType";
 
 export interface DataType {
     name: string;
+    prettyName: string;
     supportedCharts: ChartStyle[];
 }
 
@@ -17,12 +18,12 @@ export enum ChartStyle {
 }
 
 export const DataTypes = [
-    {name: "generationType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
-    {name: "generationForecastType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
-    {name: "generationForecastLongType", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
-    {name: "generationTypeOverTime", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
-    {name: "generationForecastOverTimeType", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
-    {name: "generationForecastOverLongTimeType", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]}
+    {name: "generationType", prettyName: "Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
+    {name: "generationForecastType", prettyName: "14 Day Forecast for Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
+    {name: "generationForecastLongType", prettyName: "3 Year Forecast for Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
+    {name: "generationTypeOverTime", prettyName: "Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea]},
+    {name: "generationForecastOverTimeType", prettyName: "14 Day Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
+    {name: "generationForecastOverLongTimeType", prettyName: "3 Year Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]}
 ];
 
 export function getDataType(name:string) {return DataTypes.find(d => d.name === name) ?? DataTypes[0];}

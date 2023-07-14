@@ -5,18 +5,20 @@ interface Props {
 
 }
 
-function chartStyleFromString(s : string): ChartStyle {
+function chartStylesFromString(s : string): ChartStyle[] {
     switch(s) {
         case "Bar":
-            return ChartStyle.bar;
+            return [ChartStyle.bar];
         case "Pie":
-            return ChartStyle.pie;
+            return [ChartStyle.pie];
         case "Bar Over Time":
-            return ChartStyle.barOverTime;
+            return [ChartStyle.barOverTime];
         case "Stacked Area":
-            return ChartStyle.stackedArea;
+            return [ChartStyle.stackedArea];
+        case "All":
+            return [ChartStyle.bar, ChartStyle.pie, ChartStyle.stackedArea, ChartStyle.barOverTime];
         default:
-            return ChartStyle.stackedArea;
+            return [ChartStyle.stackedArea];
     }
 }
 
@@ -39,7 +41,7 @@ function getUrl(type: DataType): string {
 
 const ChartDisplay : React.FC<Props> = () => {
     const [dataType, setDataType] = useState<DataType>(getDataType("generationType"));
-    const [chartStyle, setChartStyle] = useState<ChartStyle>(ChartStyle.bar);
+    const [chartStyle, setChartStyle] = useState<string>("Bar");
     const [data, setData] = useState();
 
     const fetchInfo = () => {
@@ -60,37 +62,39 @@ const ChartDisplay : React.FC<Props> = () => {
     }
 
     function changeChartStyle(event : React.ChangeEvent<HTMLSelectElement>) {
-        //console.log(event.target.value, chartStyleFromString(event.target.value))
-        setChartStyle(chartStyleFromString(event.target.value));
+        setChartStyle(event.target.value);
     }
 
     return (<>
-        <ul className= "flex-container"> 
+        <div className="dropdowns"> 
             <label className="select" htmlFor="slct">
                 <select id="slct" onChange={changeDataType}>
                     {DataTypes.map(type => 
-                            <option value={type.name}>{type.name}</option>)}
+                            <option value={type.name}>{type.prettyName}</option>)}
                 </select>
                 <svg>
                     <use xlinkHref="#select-arrow-down"></use>
                 </svg>
             </label>
             <label className="select" htmlFor="slct">
-                <select onChange={changeChartStyle}>
+                <select value={chartStyle} onChange={changeChartStyle}>
                     {dataType.supportedCharts.map(style => 
                         <option value={style}>{style}</option>)}
+                    <option value={"All"}>All</option>
                 </select>
                 <svg>
                     <use xlinkHref="#select-arrow-down"></use>
                 </svg>
             </label>
-        </ul>
-        <Chart dataType={dataType} chartStyle={chartStyle} data={data}/>
-        <svg className="sprites">
-            <symbol id="select-arrow-down" viewBox="0 0 10 6">
-                <polyline points="1 1 5 5 9 1"></polyline>
-            </symbol>
-        </svg>
+            <svg className="sprites">
+                <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                    <polyline points="1 1 5 5 9 1"></polyline>
+                </symbol>
+            </svg>
+        </div>
+        <ul className= "flex-container">
+        {chartStylesFromString(chartStyle).map(cs =>
+            <li><Chart dataType={dataType} chartStyle={cs} data={data}/></li>)}</ul>
         </>
     )
 }
