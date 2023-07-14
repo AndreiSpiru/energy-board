@@ -18,8 +18,10 @@ function chartStylesFromString(s : string): ChartStyle[] {
             return [ChartStyle.barOverTime];
         case "Stacked Area":
             return [ChartStyle.stackedArea];
+        case "Line":
+            return [ChartStyle.line];
         case "All":
-            return [ChartStyle.bar, ChartStyle.pie, ChartStyle.stackedArea, ChartStyle.barOverTime];
+            return [ChartStyle.bar, ChartStyle.pie, ChartStyle.stackedArea, ChartStyle.barOverTime, ChartStyle.line];
         default:
             return [ChartStyle.stackedArea];
     }

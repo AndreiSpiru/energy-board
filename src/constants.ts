@@ -11,4 +11,5 @@ export const COLORS = {
 
 export const maxNumberofDisplayedElementsStackedArea : number = 30;
 export const maxNumberofDisplayedElementsbarOverTime : number = 7;
+export const maxNumberofDisplayedElementsLine : number = 30;
   
