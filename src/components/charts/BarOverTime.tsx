@@ -9,7 +9,7 @@ import {
     ChartArea,
   } from "@progress/kendo-react-charts";
 import { SingleDimProps, TwoDimProps } from "../Chart";
-import { COLORS } from "../../constants";
+import { COLORS, maxNumberofDisplayedElementsbarOverTime } from "../../constants";
 
 interface BarOverTimeSerieses {
     label: string;
@@ -45,7 +45,7 @@ const Bar: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
             <ChartTitle text="Column Chart" />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={labels} max = {7} />
+              <ChartCategoryAxisItem categories={labels} max = {maxNumberofDisplayedElementsbarOverTime} />
             </ChartCategoryAxis>
             <ChartSeries>
               {serieses.map((item, idx) => (

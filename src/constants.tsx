@@ -7,4 +7,7 @@ export const COLORS = {
   chartTitle: "#F8F9F9",
   chartLabels: "#F8F9F9"
 };
+
+export const maxNumberofDisplayedElementsStackedArea : number = 21;
+export const maxNumberofDisplayedElementsbarOverTime : number = 7;
   
