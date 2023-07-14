@@ -6,7 +6,7 @@ export const COLORS = {
   pageBg: "#7E7E7E",
   chartTitle: "#F8F9F9",
   chartLabels: "#F8F9F9",
-  buttonBg: "#C4D5D5"
+  buttonBg: "#C4D5D5",
 };
 
 export const maxNumberofDisplayedElementsStackedArea : number = 21;

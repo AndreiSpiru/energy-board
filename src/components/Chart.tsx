@@ -21,7 +21,7 @@ export const DataTypes = [
     {name: "generationType", prettyName: "Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastType", prettyName: "14 Day Forecast for Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastLongType", prettyName: "3 Year Forecast for Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
-    {name: "generationTypeOverTime", prettyName: "Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea]},
+    {name: "generationTypeOverTime", prettyName: "Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
     {name: "generationForecastOverTimeType", prettyName: "14 Day Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
     {name: "generationForecastOverLongTimeType", prettyName: "3 Year Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]}
 ];

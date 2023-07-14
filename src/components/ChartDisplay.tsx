@@ -28,13 +28,17 @@ function chartStylesFromString(s : string): ChartStyle[] {
 function getDateFormat(date: Date){
     return date.toJSON().slice(0,10);
 }
+
+function getTomorrow(date: Date){
+    return new Date(date.getTime() + (24 * 60 * 60 * 1000));
+}
 function getUrl(type: DataType, startTime: Date, endTime: Date): string {
-    console.log(getDateFormat(startTime));
     console.log(`https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?startTime=${getDateFormat(startTime)}&endTime=${getDateFormat(endTime)}`);
     switch(type.name){
         case "generationTypeOverTime":
-        case "generationType":
             return `https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?startTime=${getDateFormat(startTime)}&endTime=${getDateFormat(endTime)}`;
+        case "generationType":
+            return `https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/summary?startTime=${getDateFormat(startTime)}&endTime=${getDateFormat(getTomorrow(startTime))}`;
         case "generationForecastOverTimeType":    
         case "generationForecastType":
             return "https://data.dev.elexon.co.uk/bmrs/api/v1/generation/availability/summary/14D";
@@ -55,6 +59,7 @@ const ChartDisplay : React.FC<Props> = () => {
 
 
     const fetchInfo = () => {
+        if(endDate.getTime() <= startDate.getTime()) return setData(undefined);
         return fetch(getUrl(dataType, startDate, endDate)).then((res) => res.json()).then((res) => setData(res));
     }
 
@@ -102,26 +107,36 @@ const ChartDisplay : React.FC<Props> = () => {
                 </symbol>
             </svg>
         </div>
+        { (dataType.name === "generationType" || dataType.name === "generationTypeOverTime") &&
         <ul className= "flex-container"> 
-            <li>
-                <h3>Start Date</h3>
+            <li> 
+                {dataType.name === "generationTypeOverTime" &&
+                    <h3>Start Date</h3>
+                }
+                {dataType.name === "generationType" &&
+                    <h3>Date</h3>
+                }
                 <DatePicker 
                     dateFormat="dd/MM/yyyy"
                     selected={startDate} 
-                    onChange={date =>date && setStartDate(date)}
-                    includeDateIntervals={[{start: new Date("01/01/2023"),end:  new Date("01/01/2024")}]}
+                    onChange={date =>date && (setStartDate(date) === null || setEndDate(getTomorrow(date)))}
+                    includeDateIntervals={[{start: new Date("01/01/2021"),end:  new Date("08/08/2023")}]}
                 />
+                
             </li>
+            { dataType.name === "generationTypeOverTime" &&
             <li>
             <h3>End Date</h3>
                 <DatePicker 
                     dateFormat="dd/MM/yyyy"
                     selected={endDate} 
                     onChange={date =>date && setEndDate(date)}
-                    includeDateIntervals={[{start: new Date("01/01/2023"),end:  new Date("01/01/2024")}]}
+                    includeDateIntervals={[{start: new Date("01/01/2021"),end:  new Date("08/08/2023")}]}
                 />
             </li>
+            }
         </ul>
+        }
         <ul className= "flex-container">
         {chartStylesFromString(chartStyle).map(cs =>
                                                <li><Chart dataType={dataType} chartStyle={cs} data={data}/></li>)}</ul>
