@@ -41,11 +41,13 @@ const Bar: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
      <Chart style={{   
         height: '40vw',
         width: '80vw',  
+        color: COLORS.chartTitle
         }}>
-            <ChartTitle text="Column Chart" />
-            <ChartLegend position="top" orientation="horizontal" />
+            <ChartTitle text="Column Chart" color={COLORS.chartTitle}/>
+            <ChartArea background={COLORS.chartBg}/>
+            <ChartLegend position="top" orientation="horizontal"/>
             <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={labels} max = {maxNumberofDisplayedElementsbarOverTime} />
+              <ChartCategoryAxisItem categories={labels} max = {maxNumberofDisplayedElementsbarOverTime} color={COLORS.chartTitle}/>
             </ChartCategoryAxis>
             <ChartSeries>
               {serieses.map((item, idx) => (
