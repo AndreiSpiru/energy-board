@@ -9,7 +9,7 @@ import {
     ChartArea,
   } from "@progress/kendo-react-charts";
 import { TwoDimProps } from "../Chart";
-import { COLORS } from "../../constants";
+import { COLORS, maxNumberofDisplayedElementsStackedArea } from "../../constants";
 
 interface StackedAreaSeries {
     label: string;
@@ -47,7 +47,7 @@ const StackedArea: React.FC<TwoDimProps> = ({ points } : TwoDimProps) => {
             <ChartTitle text="Stacked area chart" color={COLORS.chartTitle} />
             <ChartLegend position="top" orientation="horizontal" />
             <ChartCategoryAxis>
-              <ChartCategoryAxisItem categories={labels} max={21} color={COLORS.chartLabels}/>
+              <ChartCategoryAxisItem categories={labels} max={maxNumberofDisplayedElementsStackedArea} color={COLORS.chartLabels}/>
             </ChartCategoryAxis>
             <ChartSeries>
               {serieses.map((d, idx) => (

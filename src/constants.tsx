@@ -8,4 +8,7 @@ export const COLORS = {
   chartLabels: "#F8F9F9",
   buttonBg: "#C4D5D5"
 };
+
+export const maxNumberofDisplayedElementsStackedArea : number = 21;
+export const maxNumberofDisplayedElementsbarOverTime : number = 7;
   
