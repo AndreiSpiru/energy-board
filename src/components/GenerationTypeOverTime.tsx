@@ -3,7 +3,8 @@ import { ChartStyle, SingleDimDataPoint, TwoDimDataPoint } from "./Chart";
 import StackedArea from "./charts/StackedArea";
 import { GenerationTypeDataPoint } from "./GenerationType";
 import BarOverTime from "./charts/BarOverTime";
-import { maxNumberofDisplayedElementsStackedArea, maxNumberofDisplayedElementsbarOverTime } from "../constants";
+import { maxNumberofDisplayedElementsLine, maxNumberofDisplayedElementsStackedArea, maxNumberofDisplayedElementsbarOverTime } from "../constants";
+import Line from "./charts/Line";
 
 interface Props {
     data: GenerationTypeDataPoint[];
@@ -22,6 +23,8 @@ function getmaximumAllowedElements(chartStyle: ChartStyle) {
             return maxNumberofDisplayedElementsStackedArea;
         case ChartStyle.barOverTime:
             return maxNumberofDisplayedElementsbarOverTime;
+        case ChartStyle.line:
+            return maxNumberofDisplayedElementsLine;
         default:
             return 0;
     }
@@ -53,6 +56,8 @@ const GenerationTypeOverTimeChart : React.FC<Props> = (props : Props) => {
                     return (<StackedArea points={generationData}/>);
                 case ChartStyle.barOverTime:
                     return (<BarOverTime points={generationData}/>);
+                case ChartStyle.line:
+                    return (<Line points={generationData}/>);
     }
     return <></>;
 }

@@ -14,16 +14,17 @@ export enum ChartStyle {
     pie = "Pie",
     bar = "Bar",
     stackedArea = "Stacked Area",
-    barOverTime = "Bar Over Time"
+    barOverTime = "Bar Over Time",
+    line = "Line"
 }
 
 export const DataTypes = [
     {name: "generationType", prettyName: "Energy Generation Type", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastType", prettyName: "Energy Generation Forecast for Tomorrow", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
     {name: "generationForecastLongType", prettyName: "Energy Generation Forecast for Next Week", supportedCharts: [ChartStyle.bar, ChartStyle.pie]},
-    {name: "generationTypeOverTime", prettyName: "Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
-    {name: "generationForecastOverTimeType", prettyName: "14 Day Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]},
-    {name: "generationForecastOverLongTimeType", prettyName: "3 Year Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime]}
+    {name: "generationTypeOverTime", prettyName: "Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime, ChartStyle.line]},
+    {name: "generationForecastOverTimeType", prettyName: "14 Day Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime, ChartStyle.line]},
+    {name: "generationForecastOverLongTimeType", prettyName: "3 Year Forecast for Energy Generation Type Over Time", supportedCharts: [ChartStyle.stackedArea, ChartStyle.barOverTime, ChartStyle.line]}
 ];
 
 export function getDataType(name:string) {return DataTypes.find(d => d.name === name) ?? DataTypes[0];}
