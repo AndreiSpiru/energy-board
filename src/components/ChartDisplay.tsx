@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Chart, { ChartStyle, DataType, DataTypes, getDataType } from "./Chart"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useInterval } from "usehooks-ts";
 
 interface Props {
 
@@ -56,17 +57,18 @@ const ChartDisplay : React.FC<Props> = () => {
     const [data, setData] = useState();
     const [startDate, setStartDate] = useState(new Date("01/01/2023"));
     const [endDate, setEndDate] = useState(new Date("01/01/2024"));
-
+    let lastFetch : Date = new Date();
 
     const fetchInfo = () => {
         if(endDate.getTime() <= startDate.getTime()) return setData(undefined);
-        return fetch(getUrl(dataType, startDate, endDate)).then((res) => res.json()).then((res) => setData(res));
+        return fetch(getUrl(dataType, startDate, endDate)).then((res) => res.json()).then((res) => setData(res)).then((res) => lastFetch = new Date());
     }
 
     useEffect(() => {
         fetchInfo()
     }, [dataType, startDate, endDate]);
 
+    useInterval(fetchInfo, 300000);
 
     function changeDataType(event : React.ChangeEvent<HTMLSelectElement>) {
         //console.log(event.target.value, getDataType(event.target.value))
@@ -117,6 +119,7 @@ const ChartDisplay : React.FC<Props> = () => {
                     <h3>Date</h3>
                 }
                 <DatePicker 
+                    className="datePicker"
                     dateFormat="dd/MM/yyyy"
                     selected={startDate} 
                     onChange={date =>date && (setStartDate(date) === null || setEndDate(getTomorrow(date)))}
@@ -128,6 +131,7 @@ const ChartDisplay : React.FC<Props> = () => {
             <li>
             <h3>End Date</h3>
                 <DatePicker 
+                    className="datePicker"
                     dateFormat="dd/MM/yyyy"
                     selected={endDate} 
                     onChange={date =>date && setEndDate(date)}
@@ -140,6 +144,9 @@ const ChartDisplay : React.FC<Props> = () => {
         <ul className= "flex-container">
         {chartStylesFromString(chartStyle).map(cs =>
                                                <li><Chart dataType={dataType} chartStyle={cs} data={data}/></li>)}</ul>
+        { lastFetch != null &&
+            <p>Data fetched at: {lastFetch.toString()}</p>
+        }
         </>
     )
 }
